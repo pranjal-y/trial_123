@@ -19,6 +19,8 @@ def check_for_csv():
     global data_available
     while True:
         if os.path.exists(data_csv_path):
+            data_available.set()
+
             print("CSV file found.")
             data_available.set()
         else:
