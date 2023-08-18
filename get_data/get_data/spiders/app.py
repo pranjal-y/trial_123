@@ -40,7 +40,12 @@ def main():
             #cmd = ['scrapy', 'crawl', 'data_info', '-a', f'url={url}', '-a', f'tags={",".join(tags)}', '-a', f'num_columns={num_columns}', '-a', f'column_headings={",".join(column_headings)}']
             #subprocess.run(cmd)
             process = CrawlerProcess()
-            process.crawl(DataInfoSpider, url=url, tags=tags, num_columns=num_columns, column_headings=column_headings)
+            process.crawl(
+                DataInfoSpider,
+                url=url,
+                tags=",".join(tags),  # Convert list to comma-separated string
+                num_columns=num_columns,
+                column_headings=column_headings )
             process.start()
             st.success("Data scraping started. Please wait for it to finish.")
             data_available.wait()
