@@ -8,7 +8,7 @@ from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras import switch_page_button
 import streamlit_extras
 from scrapy.crawler import CrawlerProcess  # Import CrawlerProcess from Scrapy
-from get_data.get_data.spiders.data_info import DataInfoSpider #Import
+from data_info import DataInfoSpider  # Import your spider class
 
 
 
