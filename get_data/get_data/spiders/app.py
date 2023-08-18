@@ -7,7 +7,8 @@ import time
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras import switch_page_button
 import streamlit_extras
-
+from scrapy.crawler import CrawlerProcess  # Import CrawlerProcess from Scrapy
+from spiders.data_info import DataInfoSpider #Import
 
 
 
@@ -36,8 +37,11 @@ def main():
 
     if st.button("Scrape Data"):
         if url and tags and num_columns > 0 and len(column_headings) == num_columns:
-            cmd = ['scrapy', 'crawl', 'data_info', '-a', f'url={url}', '-a', f'tags={",".join(tags)}', '-a', f'num_columns={num_columns}', '-a', f'column_headings={",".join(column_headings)}']
-            subprocess.run(cmd)
+            #cmd = ['scrapy', 'crawl', 'data_info', '-a', f'url={url}', '-a', f'tags={",".join(tags)}', '-a', f'num_columns={num_columns}', '-a', f'column_headings={",".join(column_headings)}']
+            #subprocess.run(cmd)
+            process = CrawlerProcess()
+            process.crawl(DataInfoSpider, url=url, tags=tags, num_columns=num_columns, column_headings=column_headings)
+            process.start()
             st.success("Data scraping started. Please wait for it to finish.")
             data_available.wait()
 
